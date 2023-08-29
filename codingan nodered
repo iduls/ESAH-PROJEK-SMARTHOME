@@ -1,0 +1,933 @@
+[
+    {
+        "id": "89164485db7820d0",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "befcbce5672ead10",
+        "type": "ui_switch",
+        "z": "89164485db7820d0",
+        "name": "",
+        "label": "saklar 1",
+        "tooltip": "",
+        "group": "123d15b0efa397ed",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "decouple": "false",
+        "topic": "room/lamp",
+        "topicType": "str",
+        "style": "",
+        "onvalue": "on",
+        "onvalueType": "str",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "off",
+        "offvalueType": "str",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "className": ".nr-dashboard-switch {   position: relative;   width: 50px;   height: 28px;   border-radius: 14px;   background-color: #ccc;   cursor: pointer;   transition: background-color 0.3s ease; }  /* Gaya ketika switch aktif */ .nr-dashboard-switch.on {   background-color: #56d53e; }  /* Gaya toggle yang digeser */ .nr-dashboard-switch-toggle {   position: absolute;   top: 2px;   width: 24px;   height: 24px;   border-radius: 50%;   background-color: #fff;   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);   transition: transform 0.3s ease; }  /* Gaya toggle ketika switch aktif */ .nr-dashboard-switch.on .nr-dashboard-switch-toggle {   transform: translateX(22px); }",
+        "x": 300,
+        "y": 220,
+        "wires": [
+            [
+                "c3f430a108938840",
+                "47f3910fbb2f4a6e"
+            ]
+        ]
+    },
+    {
+        "id": "c3f430a108938840",
+        "type": "mqtt out",
+        "z": "89164485db7820d0",
+        "name": "",
+        "topic": "room/lamp",
+        "qos": "2",
+        "retain": "true",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "c905386f5eb85faa",
+        "x": 490,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "740656a1dbc0e801",
+        "type": "function",
+        "z": "89164485db7820d0",
+        "name": "function 1",
+        "func": "if(msg.payload.button1.value == 1){\n    msg.payload = \"on\"\n}\nelse {\n    msg.payload = \"off\"\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 220,
+        "y": 140,
+        "wires": [
+            [
+                "befcbce5672ead10"
+            ]
+        ]
+    },
+    {
+        "id": "fe5f10e8bc39c7b0",
+        "type": "ubidots_in",
+        "z": "89164485db7820d0",
+        "tier": "business",
+        "name": "Ubidots in",
+        "token": "BBFF-9tkzbxnKiPgwCF4s5du7r1eWiFs80B",
+        "device_label": "NodeRed",
+        "tls_checkbox_in": true,
+        "custom_topic_checkbox": false,
+        "label_variable_1": "button1",
+        "label_variable_2": "",
+        "label_variable_3": "",
+        "label_variable_4": "",
+        "label_variable_5": "",
+        "label_variable_6": "",
+        "label_variable_7": "",
+        "label_variable_8": "",
+        "label_variable_9": "",
+        "label_variable_10": "",
+        "checkbox_variable_1_last_value": true,
+        "checkbox_variable_2_last_value": true,
+        "checkbox_variable_3_last_value": true,
+        "checkbox_variable_4_last_value": true,
+        "checkbox_variable_5_last_value": true,
+        "checkbox_variable_6_last_value": true,
+        "checkbox_variable_7_last_value": true,
+        "checkbox_variable_8_last_value": true,
+        "checkbox_variable_9_last_value": true,
+        "checkbox_variable_10_last_value": true,
+        "x": 140,
+        "y": 60,
+        "wires": [
+            [
+                "740656a1dbc0e801"
+            ]
+        ]
+    },
+    {
+        "id": "47f3910fbb2f4a6e",
+        "type": "function",
+        "z": "89164485db7820d0",
+        "name": "function 2",
+        "func": "var label = msg.topic;\nvar value = msg.payload;\nif (value == \"on\") {\n    value = 1\n}\nelse {\n    value = 0\n}\n\nmsg.payload = {\n    status: value\n};\n\n\nmsg.payload.ubidotsDeviceLabel = \"nodered\";\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 420,
+        "y": 60,
+        "wires": [
+            [
+                "c5ba88cc696b41c1",
+                "dda9e76eeee9d31a"
+            ]
+        ]
+    },
+    {
+        "id": "c5ba88cc696b41c1",
+        "type": "ubidots_out",
+        "z": "89164485db7820d0",
+        "name": "",
+        "token": "BBFF-9tkzbxnKiPgwCF4s5du7r1eWiFs80B",
+        "label_device": "",
+        "device_label": "NodeRed",
+        "tier": "business",
+        "tls_checkbox": true,
+        "x": 570,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "df2e2b78ce2ee090",
+        "type": "ui_switch",
+        "z": "89164485db7820d0",
+        "name": "",
+        "label": "saklar 2",
+        "tooltip": "",
+        "group": "123d15b0efa397ed",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "decouple": "false",
+        "topic": "room/lamp2",
+        "topicType": "str",
+        "style": "",
+        "onvalue": "on",
+        "onvalueType": "str",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "off",
+        "offvalueType": "str",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "className": "",
+        "x": 320,
+        "y": 460,
+        "wires": [
+            [
+                "e105de8c61d1f1b6",
+                "9f611a7d27e508ff"
+            ]
+        ]
+    },
+    {
+        "id": "e105de8c61d1f1b6",
+        "type": "mqtt out",
+        "z": "89164485db7820d0",
+        "name": "",
+        "topic": "room/lamp2",
+        "qos": "2",
+        "retain": "true",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "c905386f5eb85faa",
+        "x": 490,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "7c23c19c4050c81d",
+        "type": "function",
+        "z": "89164485db7820d0",
+        "name": "function 3",
+        "func": "if(msg.payload.button2.value == 1){\n    msg.payload = \"on\"\n}\nelse {\n    msg.payload = \"off\"\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 220,
+        "y": 400,
+        "wires": [
+            [
+                "df2e2b78ce2ee090"
+            ]
+        ]
+    },
+    {
+        "id": "5733e2d72f3f0e63",
+        "type": "ubidots_in",
+        "z": "89164485db7820d0",
+        "tier": "business",
+        "name": "Ubidots in",
+        "token": "BBFF-9tkzbxnKiPgwCF4s5du7r1eWiFs80B",
+        "device_label": "NodeRed",
+        "tls_checkbox_in": true,
+        "custom_topic_checkbox": false,
+        "label_variable_1": "button2",
+        "label_variable_2": "",
+        "label_variable_3": "",
+        "label_variable_4": "",
+        "label_variable_5": "",
+        "label_variable_6": "",
+        "label_variable_7": "",
+        "label_variable_8": "",
+        "label_variable_9": "",
+        "label_variable_10": "",
+        "checkbox_variable_1_last_value": true,
+        "checkbox_variable_2_last_value": true,
+        "checkbox_variable_3_last_value": true,
+        "checkbox_variable_4_last_value": true,
+        "checkbox_variable_5_last_value": true,
+        "checkbox_variable_6_last_value": true,
+        "checkbox_variable_7_last_value": true,
+        "checkbox_variable_8_last_value": true,
+        "checkbox_variable_9_last_value": true,
+        "checkbox_variable_10_last_value": true,
+        "x": 140,
+        "y": 320,
+        "wires": [
+            [
+                "7c23c19c4050c81d"
+            ]
+        ]
+    },
+    {
+        "id": "9f611a7d27e508ff",
+        "type": "function",
+        "z": "89164485db7820d0",
+        "name": "function 4",
+        "func": "var label = msg.topic;\nvar value = msg.payload;\nif (value == \"on\") {\n    value = 1\n}\nelse {\n    value = 0\n}\n\nmsg.payload = {\n    status2: value\n};\n\n\nmsg.payload.ubidotsDeviceLabel = \"nodered\";\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 480,
+        "y": 320,
+        "wires": [
+            [
+                "09eaa513904735c4"
+            ]
+        ]
+    },
+    {
+        "id": "09eaa513904735c4",
+        "type": "ubidots_out",
+        "z": "89164485db7820d0",
+        "name": "",
+        "token": "BBFF-9tkzbxnKiPgwCF4s5du7r1eWiFs80B",
+        "label_device": "",
+        "device_label": "NodeRed",
+        "tier": "business",
+        "tls_checkbox": true,
+        "x": 570,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "6ed5c016e59d9358",
+        "type": "ui_switch",
+        "z": "89164485db7820d0",
+        "name": "",
+        "label": "saklar 3",
+        "tooltip": "",
+        "group": "123d15b0efa397ed",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "decouple": "false",
+        "topic": "room/lamp3",
+        "topicType": "str",
+        "style": "",
+        "onvalue": "on",
+        "onvalueType": "str",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "off",
+        "offvalueType": "str",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "className": "",
+        "x": 320,
+        "y": 700,
+        "wires": [
+            [
+                "23e09e1eda25d10b",
+                "e59a8ac1eea8dd1b"
+            ]
+        ]
+    },
+    {
+        "id": "23e09e1eda25d10b",
+        "type": "mqtt out",
+        "z": "89164485db7820d0",
+        "name": "",
+        "topic": "room/lamp3",
+        "qos": "2",
+        "retain": "true",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "c905386f5eb85faa",
+        "x": 490,
+        "y": 700,
+        "wires": []
+    },
+    {
+        "id": "6d234d188eae3673",
+        "type": "function",
+        "z": "89164485db7820d0",
+        "name": "function 5",
+        "func": "if(msg.payload.button3.value == 1){\n    msg.payload = \"on\"\n}\nelse {\n    msg.payload = \"off\"\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 220,
+        "y": 640,
+        "wires": [
+            [
+                "6ed5c016e59d9358"
+            ]
+        ]
+    },
+    {
+        "id": "60c406164418b7f5",
+        "type": "ubidots_in",
+        "z": "89164485db7820d0",
+        "tier": "business",
+        "name": "Ubidots in",
+        "token": "BBFF-9tkzbxnKiPgwCF4s5du7r1eWiFs80B",
+        "device_label": "NodeRed",
+        "tls_checkbox_in": true,
+        "custom_topic_checkbox": false,
+        "label_variable_1": "button3",
+        "label_variable_2": "",
+        "label_variable_3": "",
+        "label_variable_4": "",
+        "label_variable_5": "",
+        "label_variable_6": "",
+        "label_variable_7": "",
+        "label_variable_8": "",
+        "label_variable_9": "",
+        "label_variable_10": "",
+        "checkbox_variable_1_last_value": true,
+        "checkbox_variable_2_last_value": true,
+        "checkbox_variable_3_last_value": true,
+        "checkbox_variable_4_last_value": true,
+        "checkbox_variable_5_last_value": true,
+        "checkbox_variable_6_last_value": true,
+        "checkbox_variable_7_last_value": true,
+        "checkbox_variable_8_last_value": true,
+        "checkbox_variable_9_last_value": true,
+        "checkbox_variable_10_last_value": true,
+        "x": 140,
+        "y": 560,
+        "wires": [
+            [
+                "6d234d188eae3673"
+            ]
+        ]
+    },
+    {
+        "id": "e59a8ac1eea8dd1b",
+        "type": "function",
+        "z": "89164485db7820d0",
+        "name": "function 6",
+        "func": "var label = msg.topic;\nvar value = msg.payload;\nif (value == \"on\") {\n    value = 1\n}\nelse {\n    value = 0\n}\n\nmsg.payload = {\n    status3: value\n};\n\n\nmsg.payload.ubidotsDeviceLabel = \"nodered\";\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 480,
+        "y": 560,
+        "wires": [
+            [
+                "b611d46ac67f03b5"
+            ]
+        ]
+    },
+    {
+        "id": "b611d46ac67f03b5",
+        "type": "ubidots_out",
+        "z": "89164485db7820d0",
+        "name": "",
+        "token": "BBFF-9tkzbxnKiPgwCF4s5du7r1eWiFs80B",
+        "label_device": "",
+        "device_label": "NodeRed",
+        "tier": "business",
+        "tls_checkbox": true,
+        "x": 570,
+        "y": 640,
+        "wires": []
+    },
+    {
+        "id": "05f730938faddee5",
+        "type": "ui_switch",
+        "z": "89164485db7820d0",
+        "name": "",
+        "label": "saklar 4",
+        "tooltip": "",
+        "group": "123d15b0efa397ed",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "decouple": "false",
+        "topic": "room/lamp4",
+        "topicType": "str",
+        "style": "",
+        "onvalue": "on",
+        "onvalueType": "str",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "off",
+        "offvalueType": "str",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "className": "",
+        "x": 320,
+        "y": 960,
+        "wires": [
+            [
+                "47c9dff9665e538d",
+                "3b2ab4f4ab8456ab"
+            ]
+        ]
+    },
+    {
+        "id": "47c9dff9665e538d",
+        "type": "mqtt out",
+        "z": "89164485db7820d0",
+        "name": "",
+        "topic": "room/lamp4",
+        "qos": "2",
+        "retain": "true",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "c905386f5eb85faa",
+        "x": 490,
+        "y": 960,
+        "wires": []
+    },
+    {
+        "id": "6ee82bccbd309d49",
+        "type": "function",
+        "z": "89164485db7820d0",
+        "name": "function 7",
+        "func": "if(msg.payload.button4.value == 1){\n    msg.payload = \"on\"\n}\nelse {\n    msg.payload = \"off\"\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 240,
+        "y": 900,
+        "wires": [
+            [
+                "05f730938faddee5"
+            ]
+        ]
+    },
+    {
+        "id": "2831add55c5bf665",
+        "type": "ubidots_in",
+        "z": "89164485db7820d0",
+        "tier": "business",
+        "name": "Ubidots in",
+        "token": "BBFF-9tkzbxnKiPgwCF4s5du7r1eWiFs80B",
+        "device_label": "NodeRed",
+        "tls_checkbox_in": true,
+        "custom_topic_checkbox": false,
+        "label_variable_1": "button4",
+        "label_variable_2": "",
+        "label_variable_3": "",
+        "label_variable_4": "",
+        "label_variable_5": "",
+        "label_variable_6": "",
+        "label_variable_7": "",
+        "label_variable_8": "",
+        "label_variable_9": "",
+        "label_variable_10": "",
+        "checkbox_variable_1_last_value": true,
+        "checkbox_variable_2_last_value": true,
+        "checkbox_variable_3_last_value": true,
+        "checkbox_variable_4_last_value": true,
+        "checkbox_variable_5_last_value": true,
+        "checkbox_variable_6_last_value": true,
+        "checkbox_variable_7_last_value": true,
+        "checkbox_variable_8_last_value": true,
+        "checkbox_variable_9_last_value": true,
+        "checkbox_variable_10_last_value": true,
+        "x": 140,
+        "y": 820,
+        "wires": [
+            [
+                "6ee82bccbd309d49"
+            ]
+        ]
+    },
+    {
+        "id": "3b2ab4f4ab8456ab",
+        "type": "function",
+        "z": "89164485db7820d0",
+        "name": "function 8",
+        "func": "var label = msg.topic;\nvar value = msg.payload;\nif (value == \"on\") {\n    value = 1\n}\nelse {\n    value = 0\n}\n\nmsg.payload = {\n    status4: value\n};\n\n\nmsg.payload.ubidotsDeviceLabel = \"nodered\";\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 480,
+        "y": 820,
+        "wires": [
+            [
+                "89a58fcb3c175275"
+            ]
+        ]
+    },
+    {
+        "id": "89a58fcb3c175275",
+        "type": "ubidots_out",
+        "z": "89164485db7820d0",
+        "name": "",
+        "token": "BBFF-9tkzbxnKiPgwCF4s5du7r1eWiFs80B",
+        "label_device": "",
+        "device_label": "NodeRed",
+        "tier": "business",
+        "tls_checkbox": true,
+        "x": 570,
+        "y": 900,
+        "wires": []
+    },
+    {
+        "id": "dda9e76eeee9d31a",
+        "type": "debug",
+        "z": "89164485db7820d0",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 580,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "854fee6d19e18655",
+        "type": "mqtt in",
+        "z": "89164485db7820d0",
+        "name": "",
+        "topic": "room/suhu",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "c905386f5eb85faa",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 200,
+        "y": 1100,
+        "wires": [
+            [
+                "1b01326b8d6a8487",
+                "483072e8177aa827"
+            ]
+        ]
+    },
+    {
+        "id": "1b01326b8d6a8487",
+        "type": "ui_gauge",
+        "z": "89164485db7820d0",
+        "name": "",
+        "group": "fe43bdaf3a267b70",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "SUHU RUANGAN ",
+        "label": "Celsius",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 410,
+        "y": 1100,
+        "wires": []
+    },
+    {
+        "id": "b886a81830792d62",
+        "type": "ui_chart",
+        "z": "89164485db7820d0",
+        "name": "",
+        "group": "fe43bdaf3a267b70",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "label": "KELEMBAPAN",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "0",
+        "ymax": "100",
+        "removeOlder": "10",
+        "removeOlderPoints": "",
+        "removeOlderUnit": "60",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 460,
+        "y": 1160,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "a0b9ac2b627138ec",
+        "type": "mqtt in",
+        "z": "89164485db7820d0",
+        "name": "",
+        "topic": "room/lembab",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "c905386f5eb85faa",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 250,
+        "y": 1160,
+        "wires": [
+            [
+                "b886a81830792d62",
+                "9bfc1c7511683f5b"
+            ]
+        ]
+    },
+    {
+        "id": "8a6ae71d0a3a5ff0",
+        "type": "mqtt in",
+        "z": "89164485db7820d0",
+        "name": "",
+        "topic": "room/gas",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "c905386f5eb85faa",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 140,
+        "y": 1280,
+        "wires": [
+            [
+                "96390d4a8a84de6e",
+                "1d1748cc13715d67"
+            ]
+        ]
+    },
+    {
+        "id": "55d898cee2f27036",
+        "type": "ui_toast",
+        "z": "89164485db7820d0",
+        "position": "bottom right",
+        "displayTime": "3",
+        "highlight": "",
+        "sendall": true,
+        "outputs": 0,
+        "ok": "OK",
+        "cancel": "",
+        "raw": false,
+        "className": "",
+        "topic": "room/gas",
+        "name": "KEBOCORAN GAS",
+        "x": 450,
+        "y": 1280,
+        "wires": []
+    },
+    {
+        "id": "96390d4a8a84de6e",
+        "type": "function",
+        "z": "89164485db7820d0",
+        "name": "function 9",
+        "func": "if (msg.payload== 1) {\n    msg.payload = \"TIDAK ADA KEBOCORAN GAS\"\n}\nelse {\n    msg.payload = \"ADA KEBOCORAN GAS\"\n}\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 300,
+        "y": 1400,
+        "wires": [
+            [
+                "55d898cee2f27036"
+            ]
+        ]
+    },
+    {
+        "id": "90859c02421229e7",
+        "type": "ubidots_out",
+        "z": "89164485db7820d0",
+        "name": "",
+        "token": "BBFF-9tkzbxnKiPgwCF4s5du7r1eWiFs80B",
+        "label_device": "",
+        "device_label": "NodeRed",
+        "tier": "business",
+        "tls_checkbox": true,
+        "x": 490,
+        "y": 1040,
+        "wires": []
+    },
+    {
+        "id": "483072e8177aa827",
+        "type": "function",
+        "z": "89164485db7820d0",
+        "name": "function 10",
+        "func": "var label = msg.topic;\nvar value = msg.payload;\n\n\nmsg.payload = {\n    SUHU : value\n};\n\n\nmsg.payload.ubidotsDeviceLabel = \"nodered\";\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 310,
+        "y": 1040,
+        "wires": [
+            [
+                "90859c02421229e7"
+            ]
+        ]
+    },
+    {
+        "id": "9bfc1c7511683f5b",
+        "type": "function",
+        "z": "89164485db7820d0",
+        "name": "function 11",
+        "func": "var label = msg.topic;\nvar value = msg.payload;\n\n\nmsg.payload = {\n    KELEMBAPAN : value\n};\n\n\nmsg.payload.ubidotsDeviceLabel = \"nodered\";\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 610,
+        "y": 1200,
+        "wires": [
+            [
+                "658a8c24e111253e"
+            ]
+        ]
+    },
+    {
+        "id": "658a8c24e111253e",
+        "type": "ubidots_out",
+        "z": "89164485db7820d0",
+        "name": "",
+        "token": "BBFF-9tkzbxnKiPgwCF4s5du7r1eWiFs80B",
+        "label_device": "",
+        "device_label": "NodeRed",
+        "tier": "business",
+        "tls_checkbox": true,
+        "x": 770,
+        "y": 1140,
+        "wires": []
+    },
+    {
+        "id": "d7522d209dd5c043",
+        "type": "ubidots_out",
+        "z": "89164485db7820d0",
+        "name": "",
+        "token": "BBFF-9tkzbxnKiPgwCF4s5du7r1eWiFs80B",
+        "label_device": "",
+        "device_label": "NodeRed",
+        "tier": "business",
+        "tls_checkbox": true,
+        "x": 610,
+        "y": 1380,
+        "wires": []
+    },
+    {
+        "id": "1d1748cc13715d67",
+        "type": "function",
+        "z": "89164485db7820d0",
+        "name": "function 12",
+        "func": "var label = msg.topic;\nvar value = msg.payload;\n\n\nmsg.payload = {\n    GAS : value\n};\n\n\nmsg.payload.ubidotsDeviceLabel = \"nodered\";\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 290,
+        "y": 1240,
+        "wires": [
+            [
+                "d7522d209dd5c043"
+            ]
+        ]
+    },
+    {
+        "id": "123d15b0efa397ed",
+        "type": "ui_group",
+        "name": "LAMPU",
+        "tab": "0ac31d502299abbd",
+        "order": 1,
+        "disp": true,
+        "width": "8",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "c905386f5eb85faa",
+        "type": "mqtt-broker",
+        "name": "MQTT",
+        "broker": "localhost",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "fe43bdaf3a267b70",
+        "type": "ui_group",
+        "name": "SENSOR",
+        "tab": "0ac31d502299abbd",
+        "order": 2,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "0ac31d502299abbd",
+        "type": "ui_tab",
+        "name": "Room",
+        "icon": "dashboard",
+        "order": 2,
+        "disabled": false,
+        "hidden": false
+    }
+]
