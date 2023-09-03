@@ -1,8 +1,4 @@
-- 👋 Hi, I’m @iduls
-- 👀 I’m interested in programming
-- 🌱 I’m currently learning python
-
-<!---
-iduls/iduls is a ✨ special ✨ repository because its `README.md` (this file) appears on your GitHub profile.
-You can click the Preview link to take a look at your changes.
---->
+👋 Hi, kami dari tim hexsmart
+Kami membuat produk yang bernama ESAH(Enhanced Smart and Automatic House)
+  ESAH adalah Iot smarthome yang di rancang untuk mengontrol alat-alat elektronik, memonitoring suhu dan kelembapan ruangan, mendeteksi kebocoran gas, memonitoring gerakan dirumah dengan camera dan sensor gerak, dan memantau listrik
+  ![Uploading IMG_20230902_164551.jpg…]()
