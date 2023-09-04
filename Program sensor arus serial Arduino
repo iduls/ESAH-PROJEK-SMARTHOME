@@ -1,0 +1,48 @@
+#include <SoftwareSerial.h>
+
+#include <PZEM004Tv30.h>
+ 
+ char ix[10];
+ char iy[10];
+ char iz[10];
+ char iw[10];
+ char conc[360];
+  
+ char ix1[10];
+ char iy1[10];
+ char iz1[10];
+
+  
+ float V, V1;
+ float i, i1;
+ float p, p1;
+ float e;
+
+ void setup() {
+ Serial.begin (9600);
+ }
+  
+ void loop() {
+   
+ PZEM004Tv30 pzem(11,12);
+ V=pzem.voltage();
+ i = pzem.current(); 
+ p = pzem.power();
+ e = pzem.energy();
+ dtostrf(V,7,3,ix); 
+ dtostrf(i,7,3,iy); 
+ dtostrf(p,7,3,iz); 
+ dtostrf(e,7,3,iw);
+ delay(1000);
+ PZEM004Tv30 pzem1(12,13);
+ V1=pzem1.voltage(); 
+ i1 = pzem1.current(); 
+ p1 = pzem1.power();
+ dtostrf(V1,7,3,ix1);
+ dtostrf(i1,7,3,iy1); 
+ dtostrf(p1,7,3,iz1); 
+  delay(1000);
+ sprintf(conc,": %s, : %s, : %s, : %s, : %s, : %s, : %s,\n", ix,iy,iz,iw,ix1,iy1,iz1);  
+ Serial.write(conc);
+  
+ }
