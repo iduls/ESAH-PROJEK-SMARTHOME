@@ -1,0 +1,16 @@
+cara install mosquitto MQTT ke raspberry pi:
+
+update paket:
+	sudo apt update && sudo apt upgrade
+instal mosquitto
+	sudo apt install -y mosquitto mosquitto-clients
+Menambahkan mosquitto ke startup supaya langsung berjalan secara otomatis
+	sudo systemctl enable mosquitto.service
+
+mengaktifkan remote akses:
+	sudo nano /etc/mosquitto/mosquitto.conf
+pada baris terakhir tambahkan:
+	listener 1883
+	allow_anonymous true
+simpan, lalu restart mosquitto
+	sudo systemctl restart mosquitto
