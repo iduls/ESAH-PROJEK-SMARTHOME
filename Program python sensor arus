@@ -1,0 +1,29 @@
+ import serial
+ import time
+ import re
+  
+ port = "/dev/ttyACM0"
+ s1 = serial.Serial(port,9600)
+  
+ while True:
+     if s1.inWaiting()>0:
+         inputValue = s1.readline().decode() 
+         m = re.search('.:(.),.:(.),.:(.),.:(.),.:(.),.:(.),',inputValue) # command used to read the information and split it between the charcaters ':' and ','
+         v1 = m.group(1).replace(" ","") ## command used to saved the information splitted before in a the variable 
+         i1 = m.group(2).replace(" ","")
+         p1 = m.group(3).replace(" ","")
+         v2 = m.group(4).replace(" ","")
+         i2 = m.group(5).replace(" ","")
+         p2 = m.group(6).replace(" ","")
+         a = float(v1)
+         b = float(i1)
+         c = float(p1)
+         d = float(v2)
+         e = float(i2)
+         f = float(p2)
+         print("Voltage1:",+a)
+         print("Current1:",+b)
+         print("Power1:",+c)
+         print("Voltage2:",+d)
+         print("Current2:",+e)
+         print("Power2:",+f)
