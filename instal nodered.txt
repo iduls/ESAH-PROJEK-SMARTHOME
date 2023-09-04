@@ -1,0 +1,19 @@
+Menginstal nodered di raspberry pi
+	bash <(curl -sL https://raw.githubusercontent.com/node-red/linux-installers/master/deb/update-nodejs-and-nodered)
+
+konfigurasi node-red
+	node-red admin init
+	tekan enter : /home/pi/.node-red/settings.js
+	Do you want to set up user security? Yes.
+	masukkan username lalu enter.
+	masukkan password lalu Enter.
+	Do you want to enable the Projects feature? No.
+	masukkan nama untuk file flows atau pilih default "flows.json" tekan enter.
+	Allow Function nodes to load external modules? Yes.
+	
+Start node-red
+	node-red-start
+node-red berjalan di local server, bisa diakses dengan:
+	localhost:1880 lewat browser
+autostart nodered
+	sudo systemctl enable nodered.service
